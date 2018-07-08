@@ -1,23 +1,21 @@
 package models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "persons")
+@Table(name = "filmStaff")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Person {
+public abstract class Film_staff {
 
     private int id;
     private String name;
-    private int salary;
+    private int feeInMillions;
 
-    public Person(){}
+    public Film_staff(){}
 
-    public Person(String name, int salary) {
+    public Film_staff(String name, int fee) {
         this.name = name;
-        this.salary = salary;
+        this.feeInMillions = fee;
     }
 
     @Id
@@ -40,12 +38,12 @@ public abstract class Person {
         this.name = name;
     }
 
-    @Column(name = "salary")
-    public int getSalary() {
-        return salary;
+    @Column(name = "fee_in_Millions")
+    public int getFeeInMillions() {
+        return feeInMillions;
     }
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setFeeInMillions(int feeInMillions) {
+        this.feeInMillions = feeInMillions;
     }
 
 }

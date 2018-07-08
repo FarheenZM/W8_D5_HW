@@ -8,15 +8,17 @@ import java.util.List;
 
 @Entity
 @Table(name = "actors")
-public class Actor extends Person implements IFilm {
+public class Actor extends Film_staff implements IFilm {
 
     private List<Film> films;
+    private int cash;
 
     public Actor(){}
 
-    public Actor(String name, int salary) {
-        super(name, salary);
+    public Actor(String name, int fee) {
+        super(name, fee);
         this.films = new ArrayList<Film>();
+        this.cash = 0;
     }
 
 
@@ -35,5 +37,24 @@ public class Actor extends Person implements IFilm {
 
     public void addFilm(Film film) {
         this.films.add(film);
+    }
+
+    @Column(name = "cash")
+    public int getCash() {
+        return cash;
+    }
+
+    public void setCash(int cash) {
+        this.cash = cash;
+    }
+
+    public int filmsAppearedByGenre(String genre){
+        int count = 0;
+        for(Film film : this.films){
+            if( genre == film.getGenre()){
+                count += 1;
+            }
+        }
+        return count;
     }
 }

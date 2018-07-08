@@ -11,14 +11,14 @@ public class Studio implements IFilm {
 
     private int id;
     private String name;
-    private int budget;
+    private int budgetInMillions;
     private List<Film> films;
 
     public Studio(){}
 
     public Studio(String name, int budget) {
         this.name = name;
-        this.budget = budget;
+        this.budgetInMillions = budget;
         this.films = new ArrayList<Film>();
     }
 
@@ -41,13 +41,13 @@ public class Studio implements IFilm {
     }
 
 
-    @Column(name = "budget")
-    public int getBudget() {
-        return budget;
+    @Column(name = "budget_in_Millions")
+    public int getBudgetInMillions() {
+        return budgetInMillions;
     }
 
-    public void setBudget(int budget) {
-        this.budget = budget;
+    public void setBudgetInMillions(int budgetInMillions) {
+        this.budgetInMillions = budgetInMillions;
     }
 
     @OneToMany(mappedBy = "studio", fetch = FetchType.LAZY)
@@ -61,6 +61,12 @@ public class Studio implements IFilm {
 
     public void addFilm(Film film) {
         this.films.add(film);
+    }
+
+    public void payActor(Actor actor){
+        int amount = actor.getCash() + actor.getFeeInMillions();
+        actor.setCash(amount);
+        this.budgetInMillions -= actor.getFeeInMillions();
     }
 
 }

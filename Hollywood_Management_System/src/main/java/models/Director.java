@@ -7,14 +7,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "directors")
-public class Director extends Person implements IFilm {
+public class Director extends Film_staff implements IFilm {
 
     private List<Film> films;
 
     public Director(){}
 
-    public Director(String name, int salary) {
-        super(name, salary);
+    public Director(String name, int fee) {
+        super(name, fee);
         this.films = new ArrayList<Film>();
     }
 
@@ -31,4 +31,5 @@ public class Director extends Person implements IFilm {
     public void addFilm(Film film) {
         this.films.add(film);
     }
+
 }
